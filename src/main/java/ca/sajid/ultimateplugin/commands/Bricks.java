@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public class test implements CommandExecutor {
+public class Bricks implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -17,6 +17,8 @@ public class test implements CommandExecutor {
             ItemStack bricks = new ItemStack(Material.BRICK, 20);
 
             player.getInventory().addItem(bricks);
+        } else {
+            sender.sendMessage("You need to be a player to use this command.");
         }
 
         return true;

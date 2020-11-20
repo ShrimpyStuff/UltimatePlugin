@@ -1,6 +1,6 @@
 package ca.sajid.ultimateplugin;
 
-import ca.sajid.ultimateplugin.commands.test;
+import ca.sajid.ultimateplugin.commands.Bricks;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class UltimatePlugin extends JavaPlugin {
@@ -8,7 +8,7 @@ public final class UltimatePlugin extends JavaPlugin {
     @Override
     public void onEnable() {
 
-        this.getCommand("test").setExecutor(new test());
+        this.getCommand("Bricks").setExecutor(new Bricks());
 
     }
 
