@@ -3,6 +3,6 @@ version: 1.0
 main: ca.sajid.ultimateplugin.UltimatePlugin
 api-version: 1.16
 commands:
-  test:
-    description: Test command
-    usage: /test
+  Bricks:
+    description: Gives player 20 bricks
+    usage: /Bricks
