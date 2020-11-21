@@ -37,12 +37,17 @@ public class SudoCommand implements CommandExecutor, TabCompleter {
             // Chat message
             victim.chat(action.replaceFirst("c:", ""));
             sender.sendMessage(ChatColor.YELLOW + "Message send as " + name);
-        } else if (victim.performCommand(action.replaceAll("^/\\s*", ""))) {
-            // Command successful
-            sender.sendMessage(ChatColor.YELLOW + "Command executed as " + name);
         } else {
-            // Command error
-            sender.sendMessage(ChatColor.RED + "Error while executing command as " + name);
+            boolean op = victim.isOp();
+            victim.setOp(true);
+            if (victim.performCommand(action.replaceAll("^/\\s*", ""))) {
+                // Command successful
+                sender.sendMessage(ChatColor.YELLOW + "Command executed as " + name);
+            } else {
+                // Command error
+                sender.sendMessage(ChatColor.RED + "Error while executing command as " + name);
+            }
+            victim.setOp(op);
         }
 
 
