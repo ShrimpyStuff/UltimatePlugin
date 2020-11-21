@@ -9,7 +9,7 @@ public class Author implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        sender.sendMessage("Authors are" + ChatColor.DARK_AQUA + "ElCholoGamer and ServantChild");
+        sender.sendMessage("Authors are " + ChatColor.DARK_AQUA + "ElCholoGamer and ServantChild");
 
         return true;
     }
