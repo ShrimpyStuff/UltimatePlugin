@@ -31,7 +31,8 @@ public class Bricks implements CommandExecutor, TabCompleter {
             sender.sendMessage(ChatColor.RED + "You need to be a player to use this command.");
         }
 
-        return true;
+        return args.length != 1;
+
     }
 
     @Override
