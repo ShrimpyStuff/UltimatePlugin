@@ -3,10 +3,10 @@ version: 1.0.0
 main: ca.sajid.ultimateplugin.UltimatePlugin
 api-version: 1.16
 commands:
-  Bricks:
-    description: Gives player 20 bricks
+  author:
+    description: Authors
     usage: /<command>
-    permission: up.bricks
+    permission: up.author
   sudo:
     description: Executes a command or a chat message as another player with full permissions
     usage: /<command> [player] [c:message | command]
