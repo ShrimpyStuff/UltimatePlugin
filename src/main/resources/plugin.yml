@@ -11,3 +11,7 @@ commands:
     description: Executes a command or a chat message as another player with full permissions
     usage: /<command> [player] [c:message | command]
     permission: up.sudo
+  invsee:
+    description: See a player's inventory
+    usage: /<command> [player]
+    permission: up.invsee
