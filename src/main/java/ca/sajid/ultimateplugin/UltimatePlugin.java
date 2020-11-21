@@ -1,6 +1,6 @@
 package ca.sajid.ultimateplugin;
 
-import ca.sajid.ultimateplugin.commands.Bricks;
+import ca.sajid.ultimateplugin.commands.Author;
 import ca.sajid.ultimateplugin.commands.SudoCommand;
 import ca.sajid.ultimateplugin.listeners.OnChatMessage;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -16,7 +16,7 @@ public final class UltimatePlugin extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new OnChatMessage(), this);
 
-        getCommand("Bricks").setExecutor(new Bricks());
+        getCommand("author").setExecutor(new Author());
         getCommand("sudo").setExecutor(new SudoCommand());
 
         PluginDescriptionFile desc = getDescription();
