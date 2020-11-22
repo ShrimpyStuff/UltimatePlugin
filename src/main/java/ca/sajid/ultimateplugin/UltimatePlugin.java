@@ -5,6 +5,7 @@ import ca.sajid.ultimateplugin.commands.Lightning;
 import ca.sajid.ultimateplugin.commands.SudoCommand;
 import ca.sajid.ultimateplugin.commands.InvSee;
 import ca.sajid.ultimateplugin.listeners.OnChatMessage;
+import ca.sajid.ultimateplugin.listeners.OnPlayerJoin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -17,6 +18,7 @@ public final class UltimatePlugin extends JavaPlugin {
         plugin = this;
 
         getServer().getPluginManager().registerEvents(new OnChatMessage(), this);
+        getServer().getPluginManager().registerEvents(new OnPlayerJoin(), this);
 
         getCommand("author").setExecutor(new Author());
         getCommand("sudo").setExecutor(new SudoCommand());
