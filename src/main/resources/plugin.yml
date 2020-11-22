@@ -14,4 +14,8 @@ commands:
   InvSee:
     description: See a player's inventory
     usage: /<command> [player]
-    permission: up.invsee
+    permission: up.InvSee
+  Lightning:
+    description: Summon a bolt of lightning at your location
+    usage: /<command>
+    permission: up.Lightning
