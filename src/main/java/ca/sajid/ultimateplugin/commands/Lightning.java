@@ -18,7 +18,7 @@ public class Lightning implements CommandExecutor  {
 
             int sumX = 0;
             int sumZ = 0;
-            int sumY = 63;
+            int Y = 63;
 
             Chunk[] chunks = player.getWorld().getLoadedChunks();
             for(Chunk c : chunks) {
@@ -26,7 +26,7 @@ public class Lightning implements CommandExecutor  {
                 sumZ += c.getZ();
                 int avgX = sumX / chunks.length;
                 int avgZ = sumZ / chunks.length;
-                Location location = new Location(player.getWorld(), avgX, sumY, avgZ);
+                Location location = new Location(player.getWorld(), avgX, Y, avgZ);
                 player.getWorld().strikeLightning(location);
             }
 
