@@ -11,11 +11,12 @@ commands:
     description: Executes a command or a chat message as another player with full permissions
     usage: /<command> [player] [c:message | command]
     permission: up.sudo
-  InvSee:
+  inventory:
     description: See a player's inventory
     usage: /<command> [player]
+    aliases: [inv]
     permission: up.InvSee
-  Lightning:
+  lightning:
     description: Summon a bolt of lightning at your location
     usage: /<command>
     permission: up.Lightning

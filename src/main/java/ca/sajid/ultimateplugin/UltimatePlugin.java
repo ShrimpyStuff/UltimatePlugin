@@ -20,7 +20,7 @@ public final class UltimatePlugin extends JavaPlugin {
 
         getCommand("author").setExecutor(new Author());
         getCommand("sudo").setExecutor(new SudoCommand());
-        getCommand("InvSee").setExecutor(new InvSee());
+        getCommand("inventory").setExecutor(new InvSee());
         getCommand("lightning").setExecutor(new Lightning());
 
         PluginDescriptionFile desc = getDescription();
