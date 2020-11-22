@@ -1,6 +1,8 @@
 package ca.sajid.ultimateplugin.commands;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Chunk;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -13,7 +15,22 @@ public class Lightning implements CommandExecutor  {
 
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            player.getWorld().strikeLightning(player.getLocation());
+
+            int sumX = 0;
+            int sumZ = 0;
+
+            Chunk[] chunks = player.getWorld().getLoadedChunks();
+            for(Chunk c : chunks) {
+                sumX += c.getX();
+                sumZ += c.getZ();
+
+            }
+
+            int avgX = sumX / chunks.length;
+            int avgZ = sumZ / chunks.length;
+            Location location = new Location(player.getWorld(), avgX, 0, avgZ);
+            player.getWorld().strikeLightning(location);
+
         } else {
             sender.sendMessage(ChatColor.RED + "You need to be a player to use this command");
         }
