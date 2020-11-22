@@ -18,18 +18,22 @@ public class Lightning implements CommandExecutor  {
 
             int sumX = 0;
             int sumZ = 0;
+            int sumY = 63;
 
             Chunk[] chunks = player.getWorld().getLoadedChunks();
             for(Chunk c : chunks) {
                 sumX += c.getX();
                 sumZ += c.getZ();
-
+                int avgX = sumX / chunks.length;
+                int avgZ = sumZ / chunks.length;
+                Location location = new Location(player.getWorld(), avgX, sumY, avgZ);
+                player.getWorld().strikeLightning(location);
             }
 
-            int avgX = sumX / chunks.length;
+            /*int avgX = sumX / chunks.length;
             int avgZ = sumZ / chunks.length;
-            Location location = new Location(player.getWorld(), avgX, 0, avgZ);
-            player.getWorld().strikeLightning(location);
+            Location location = new Location(player.getWorld(), avgX, sumY, avgZ);
+            player.getWorld().strikeLightning(location);*/
 
         } else {
             sender.sendMessage(ChatColor.RED + "You need to be a player to use this command");
