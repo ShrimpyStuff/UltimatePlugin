@@ -16,7 +16,3 @@ commands:
     usage: /<command> [player]
     aliases: [inv]
     permission: up.InvSee
-  lightning:
-    description: Summon a bolt of lightning at your location
-    usage: /<command>
-    permission: up.Lightning
