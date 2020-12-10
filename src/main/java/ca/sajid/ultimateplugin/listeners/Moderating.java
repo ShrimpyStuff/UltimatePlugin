@@ -8,7 +8,7 @@ public class Moderating implements Listener {
     @EventHandler
     public void onChatMessage(AsyncPlayerChatEvent e) {
         String message = e.getMessage();
-        String[] badWords = {"", ""};
+        String[] badWords = {"fuck", "shit"};
         for (String word : badWords) {
             int length = word.length();
             String fixedWord = new String(new char[length]).replace("\0", "#");
