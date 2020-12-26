@@ -23,6 +23,7 @@ public class InvSee implements CommandExecutor {
             
             if (targetPlayer == player) {
                 sender.sendMessage(ChatColor.RED + "Can't access your own inventory");
+                return true;
             }
             
             Inventory targetInv = targetPlayer.getInventory();
