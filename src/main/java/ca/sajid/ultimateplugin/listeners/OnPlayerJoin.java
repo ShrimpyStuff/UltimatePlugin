@@ -9,6 +9,6 @@ public class OnPlayerJoin implements Listener {
         public void onPlayerJoin(PlayerJoinEvent event)
         {
             String serverName = event.getPlayer().getServer().getName();
-            event.setJoinMessage("Welcome to" + serverName + "," + event.getPlayer().getName() + "!");
+            event.setJoinMessage("Welcome to" + serverName + ", " + event.getPlayer().getName() + "!");
         }
     }
