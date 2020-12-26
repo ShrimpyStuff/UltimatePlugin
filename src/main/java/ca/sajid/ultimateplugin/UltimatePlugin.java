@@ -1,9 +1,9 @@
 package ca.sajid.ultimateplugin;
 
 import ca.sajid.ultimateplugin.commands.Author;
+import ca.sajid.ultimateplugin.commands.InventoryOpen;
 import ca.sajid.ultimateplugin.commands.Lightning;
 import ca.sajid.ultimateplugin.commands.SudoCommand;
-import ca.sajid.ultimateplugin.commands.InvSee;
 import ca.sajid.ultimateplugin.listeners.Moderating;
 import ca.sajid.ultimateplugin.listeners.OnChatMessage;
 import ca.sajid.ultimateplugin.listeners.OnPlayerJoin;
@@ -24,8 +24,8 @@ public final class UltimatePlugin extends JavaPlugin {
 
         getCommand("author").setExecutor(new Author());
         getCommand("sudo").setExecutor(new SudoCommand());
-        getCommand("inventory").setExecutor(new InvSee());
-        getCommand("lightning").setExecutor(new Lightning());
+        getCommand("inventory").setExecutor(new InventoryOpen());
+        //getCommand("lightning").setExecutor(new Lightning());
 
         PluginDescriptionFile desc = getDescription();
         Utils.log("&a%s v%s enabled!", desc.getName(), desc.getVersion());
