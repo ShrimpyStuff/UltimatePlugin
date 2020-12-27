@@ -23,7 +23,7 @@ public class Moderating implements Listener {
         request.connect();
 
         JsonParser jp = new JsonParser();
-        JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent())); //Convert the input stream to a json element
+        JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent()));
         JsonObject rootObj = root.getAsJsonObject();
         String text = rootObj.get("result").getAsString();
 
