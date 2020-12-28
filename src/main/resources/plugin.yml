@@ -15,4 +15,4 @@ commands:
     description: See a player's inventory
     usage: /<command> [player]
     aliases: [inv]
-    permission: up.InvSee
+    permission: up.inventory
