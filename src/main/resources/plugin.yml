@@ -9,12 +9,10 @@ commands:
   sudo:
     description: Executes a command or a chat message as another player with full permissions
     usage: /<command> [player] [c:message | command]
-    permission: up.sudo
   inventory:
     description: See a player's inventory
     usage: /<command> [player]
     aliases: [inv]
-    permission: up.inventory
 permissions:
   up.author:
     default: true
