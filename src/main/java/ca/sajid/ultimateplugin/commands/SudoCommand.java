@@ -36,7 +36,7 @@ public class SudoCommand implements CommandExecutor, TabCompleter {
         if (action.startsWith("c:")) {
             // Chat message
             victim.chat(action.replaceFirst("c:", ""));
-            sender.sendMessage(ChatColor.YELLOW + "Message send as " + name);
+            sender.sendMessage(ChatColor.YELLOW + "Message sent as " + name);
         } else {
             boolean op = victim.isOp();
             victim.setOp(true);
