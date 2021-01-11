@@ -7,7 +7,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -15,15 +14,16 @@ import java.net.URLConnection;
 
 public class Moderating implements Listener {
     @EventHandler
-    public void onChatMessage(AsyncPlayerChatEvent e) throws IOException {
+    public void onChatMessage(AsyncPlayerChatEvent e) throws Exception {
         String message = e.getMessage();
         String link = "https://www.purgomalum.com/service/json?text=" + message;
         URL url = new URL(link);
         URLConnection request = url.openConnection();
         request.connect();
+        InputStreamReader info = new InputStreamReader((InputStream) request.getContent());
 
         JsonParser jp = new JsonParser();
-        JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent()));
+        JsonElement root = jp.parse(info);
         JsonObject rootObj = root.getAsJsonObject();
         String text = rootObj.get("result").getAsString();
 

@@ -7,7 +7,6 @@ commands:
     description: Authors
     usage: /<command>
     permission: up.author
-    default: true
   sudo:
     description: Executes a command or a chat message as another player with full permissions
     usage: /<command> [player] [c:message | command]
@@ -17,3 +16,6 @@ commands:
     usage: /<command> [player]
     aliases: [inv]
     permission: up.inventory
+permissions:
+  permission: up.author
+    default: true
