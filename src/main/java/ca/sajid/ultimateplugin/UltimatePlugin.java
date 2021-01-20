@@ -4,6 +4,7 @@ import ca.sajid.ultimateplugin.commands.Author;
 import ca.sajid.ultimateplugin.commands.InventoryOpen;
 import ca.sajid.ultimateplugin.commands.Lightning;
 import ca.sajid.ultimateplugin.commands.SudoCommand;
+import ca.sajid.ultimateplugin.listeners.DeadChest;
 import ca.sajid.ultimateplugin.listeners.Moderating;
 import ca.sajid.ultimateplugin.listeners.OnChatMessage;
 import ca.sajid.ultimateplugin.listeners.OnPlayerJoin;
@@ -21,6 +22,7 @@ public final class UltimatePlugin extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new OnChatMessage(), this);
         getServer().getPluginManager().registerEvents(new OnPlayerJoin(), this);
         getServer().getPluginManager().registerEvents(new Moderating(), this);
+        getServer().getPluginManager().registerEvents(new DeadChest(), this);
 
         getCommand("author").setExecutor(new Author());
         getCommand("sudo").setExecutor(new SudoCommand());
