@@ -16,5 +16,7 @@ commands:
 permissions:
   up.author:
     default: true
-  up.inventory
-  up.sudo
+  up.inventory:
+    default: op
+  up.sudo:
+    default: op
