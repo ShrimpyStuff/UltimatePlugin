@@ -20,8 +20,9 @@ public class DeadChest implements Listener {
 
 
             Block block = loc.getBlock();
+            if (player.getInventory().isEmpty()) return;
 
-            if ( block.getType().equals(Material.AIR) ) {
+            if ( block.getType().equals(Material.AIR)) {
 
                 block.setType(Material.CHEST);
 
