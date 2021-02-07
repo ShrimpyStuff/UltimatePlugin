@@ -1,12 +1,11 @@
 package ca.sajid.ultimateplugin.listeners;
 
-import org.bukkit.Location;
+import ca.sajid.ultimateplugin.util.BaseListener;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -15,7 +14,7 @@ import org.bukkit.inventory.PlayerInventory;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class DeadChest implements Listener {
+public class DeadChest extends BaseListener {
 
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent e) {

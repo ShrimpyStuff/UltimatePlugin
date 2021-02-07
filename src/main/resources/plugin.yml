@@ -1,5 +1,6 @@
 name: UltimatePlugin
 version: 1.0.0
+authors: [ ShrimpyStuff, ElCholoGamer ]
 main: ca.sajid.ultimateplugin.UltimatePlugin
 api-version: 1.16
 commands:

@@ -1,19 +1,22 @@
 package ca.sajid.ultimateplugin.commands;
 
+import ca.sajid.ultimateplugin.util.BaseCommand;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SudoCommand implements CommandExecutor, TabCompleter {
+public class SudoCommand extends BaseCommand {
+
+    public SudoCommand() {
+        super("sudo");
+    }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+    public boolean execute(CommandSender sender, Command cmd, String label, String[] args) {
         if (args.length < 2) return false;
 
         Player victim = sender.getServer().getPlayer(args[0]);
@@ -40,7 +43,8 @@ public class SudoCommand implements CommandExecutor, TabCompleter {
         } else {
             boolean op = victim.isOp();
             victim.setOp(true);
-            if (victim.performCommand(action.replaceAll("^/\\s*", ""))) {
+
+            if (victim.performCommand(action.replaceAll("^/", ""))) {
                 // Command successful
                 sender.sendMessage(ChatColor.YELLOW + "Command executed as " + name);
             } else {
@@ -49,7 +53,6 @@ public class SudoCommand implements CommandExecutor, TabCompleter {
             }
             victim.setOp(op);
         }
-
 
         return true;
     }
@@ -66,7 +69,6 @@ public class SudoCommand implements CommandExecutor, TabCompleter {
                 break;
             case 2:
                 opts.add("c:");
-                break;
         }
 
         opts.removeIf(s -> !s.startsWith(args[args.length - 1]));

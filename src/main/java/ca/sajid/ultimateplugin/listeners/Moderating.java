@@ -1,10 +1,10 @@
 package ca.sajid.ultimateplugin.listeners;
 
+import ca.sajid.ultimateplugin.util.BaseListener;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import java.io.IOException;
@@ -14,7 +14,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 
-public class Moderating implements Listener {
+public class Moderating extends BaseListener {
 
     // Try to specify the exception type tho
     @EventHandler

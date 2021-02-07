@@ -1,22 +1,20 @@
 package ca.sajid.ultimateplugin.commands;
 
+import ca.sajid.ultimateplugin.util.BaseCommand;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
-public class InventoryOpen implements CommandExecutor {
+public class InventoryOpen extends BaseCommand {
+
+    public InventoryOpen() {
+        super("inventory", true);
+    }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (!(sender instanceof Player)) {
-            sender.sendMessage("You must be a player to use this command");
-            return true;
-
-        }
-
+    public boolean execute(CommandSender sender, Command cmd, String label, String[] args) {
         Player target = sender.getServer().getPlayer(args[0]);
 
         if (target == null) {

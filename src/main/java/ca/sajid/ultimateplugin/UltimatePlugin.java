@@ -2,13 +2,11 @@ package ca.sajid.ultimateplugin;
 
 import ca.sajid.ultimateplugin.commands.Author;
 import ca.sajid.ultimateplugin.commands.InventoryOpen;
-import ca.sajid.ultimateplugin.commands.Lightning;
 import ca.sajid.ultimateplugin.commands.SudoCommand;
 import ca.sajid.ultimateplugin.listeners.DeadChest;
 import ca.sajid.ultimateplugin.listeners.Moderating;
 import ca.sajid.ultimateplugin.listeners.OnChatMessage;
 import ca.sajid.ultimateplugin.listeners.OnPlayerJoin;
-import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class UltimatePlugin extends JavaPlugin {
@@ -19,18 +17,17 @@ public final class UltimatePlugin extends JavaPlugin {
     public void onEnable() {
         plugin = this;
 
-        getServer().getPluginManager().registerEvents(new OnChatMessage(), this);
-        getServer().getPluginManager().registerEvents(new OnPlayerJoin(), this);
-        getServer().getPluginManager().registerEvents(new Moderating(), this);
-        getServer().getPluginManager().registerEvents(new DeadChest(), this);
+        new OnChatMessage().listen();
+        new OnPlayerJoin().listen();
+        new Moderating().listen();
+        new DeadChest().listen();
 
-        getCommand("author").setExecutor(new Author());
-        getCommand("sudo").setExecutor(new SudoCommand());
-        getCommand("inventory").setExecutor(new InventoryOpen());
-        //getCommand("lightning").setExecutor(new Lightning());
+        new Author().register();
+        new SudoCommand().register();
+        new InventoryOpen().register();
+        // new Lightning().register();
 
-        PluginDescriptionFile desc = getDescription();
-        Utils.log("&a%s v%s enabled!", desc.getName(), desc.getVersion());
+        Utils.log("&a%s v%s enabled!", getName(), getDescription().getVersion());
     }
 
     public static UltimatePlugin getPlugin() {

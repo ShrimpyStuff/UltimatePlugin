@@ -1,22 +1,20 @@
 package ca.sajid.ultimateplugin.commands;
 
-import org.bukkit.ChatColor;
+import ca.sajid.ultimateplugin.util.BaseCommand;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class Lightning implements CommandExecutor {
+public class Lightning extends BaseCommand {
+
+    public Lightning() {
+        super("lightning", true);
+    }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (!(sender instanceof Player)) {
-            sender.sendMessage(ChatColor.RED + "You need to be a player to use this command");
-            return true;
-        }
-
+    public boolean execute(CommandSender sender, Command cmd, String label, String[] args) {
         Player player = (Player) sender;
 
         int[] sum = {0, 0};
