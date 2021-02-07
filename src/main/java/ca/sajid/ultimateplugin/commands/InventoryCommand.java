@@ -7,9 +7,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
-public class InventoryOpen extends BaseCommand {
+public class InventoryCommand extends BaseCommand {
 
-    public InventoryOpen() {
+    public InventoryCommand() {
         super("inventory", true);
     }
 

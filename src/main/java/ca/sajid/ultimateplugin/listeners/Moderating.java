@@ -4,6 +4,7 @@ import ca.sajid.ultimateplugin.util.BaseListener;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
@@ -31,6 +32,6 @@ public class Moderating extends BaseListener {
         JsonObject rootObj = root.getAsJsonObject();
         String text = rootObj.get("result").getAsString();
 
-        e.setMessage(text);
+        e.setMessage(ChatColor.translateAlternateColorCodes('&', text));
     }
 }

@@ -7,9 +7,9 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class Lightning extends BaseCommand {
+public class LightningCommand extends BaseCommand {
 
-    public Lightning() {
+    public LightningCommand() {
         super("lightning", true);
     }
 
@@ -18,22 +18,19 @@ public class Lightning extends BaseCommand {
         Player player = (Player) sender;
 
         int[] sum = {0, 0};
-        int Y = 63;
+        int y = 63;
 
         Chunk[] chunks = player.getWorld().getLoadedChunks();
         for (Chunk c : chunks) {
             sum[0] += c.getX();
             sum[1] += c.getZ();
-            int avgX = sum[0] / chunks.length;
-            int avgZ = sum[1] / chunks.length;
-            Location location = new Location(player.getWorld(), avgX, Y, avgZ);
-            player.getWorld().strikeLightning(location);
         }
 
-        /*int avgX = sumX / chunks.length;
-        int avgZ = sumZ / chunks.length;
-        Location location = new Location(player.getWorld(), avgX, sumY, avgZ);
-        player.getWorld().strikeLightning(location);*/
+        int avgX = sum[0] / chunks.length;
+        int avgZ = sum[1] / chunks.length;
+
+        Location location = new Location(player.getWorld(), avgX, y, avgZ);
+        player.getWorld().strikeLightning(location);
 
         return true;
     }

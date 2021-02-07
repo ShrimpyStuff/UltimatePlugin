@@ -1,11 +1,10 @@
 package ca.sajid.ultimateplugin;
 
-import ca.sajid.ultimateplugin.commands.Author;
-import ca.sajid.ultimateplugin.commands.InventoryOpen;
+import ca.sajid.ultimateplugin.commands.AuthorCommand;
+import ca.sajid.ultimateplugin.commands.InventoryCommand;
 import ca.sajid.ultimateplugin.commands.SudoCommand;
 import ca.sajid.ultimateplugin.listeners.DeadChest;
 import ca.sajid.ultimateplugin.listeners.Moderating;
-import ca.sajid.ultimateplugin.listeners.OnChatMessage;
 import ca.sajid.ultimateplugin.listeners.OnPlayerJoin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -17,14 +16,13 @@ public final class UltimatePlugin extends JavaPlugin {
     public void onEnable() {
         plugin = this;
 
-        new OnChatMessage().listen();
         new OnPlayerJoin().listen();
         new Moderating().listen();
         new DeadChest().listen();
 
-        new Author().register();
+        new AuthorCommand().register();
         new SudoCommand().register();
-        new InventoryOpen().register();
+        new InventoryCommand().register();
         // new Lightning().register();
 
         Utils.log("&a%s v%s enabled!", getName(), getDescription().getVersion());

@@ -6,9 +6,9 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class Author extends BaseCommand {
+public class AuthorCommand extends BaseCommand {
 
-    public Author() {
+    public AuthorCommand() {
         super("author");
     }
 
