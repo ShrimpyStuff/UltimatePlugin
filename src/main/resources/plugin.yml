@@ -12,7 +12,8 @@ commands:
   inventory:
     description: See a player's inventory
     usage: /<command> [player]
-    aliases: [inv]
+    aliases: [ inv ]
+
 permissions:
   up.author:
     default: true

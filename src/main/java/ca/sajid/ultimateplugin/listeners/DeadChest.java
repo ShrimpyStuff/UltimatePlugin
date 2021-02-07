@@ -10,35 +10,30 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
+
+import java.util.Arrays;
+import java.util.Objects;
 
 public class DeadChest implements Listener {
+
     @EventHandler
-    public void onPlayerDeath(PlayerDeathEvent event) {
+    public void onPlayerDeath(PlayerDeathEvent e) {
+        Player player = e.getEntity();
+        PlayerInventory inv = player.getInventory();
+        Block block = player.getLocation().getBlock();
 
-        Player player = event.getEntity();
-        Location loc = player.getLocation();
+        if (inv.isEmpty() || !block.getType().equals(Material.AIR)) return;
 
+        block.setType(Material.CHEST);
+        Chest chest = (Chest) block.getState();
+        Inventory chestInv = chest.getBlockInventory();
 
-            Block block = loc.getBlock();
-            if (player.getInventory().isEmpty()) return;
+        ItemStack[] deadInv = player.getInventory().getContents();
 
-            if ( block.getType().equals(Material.AIR)) {
+        e.getDrops().clear();
 
-                block.setType(Material.CHEST);
-
-                ItemStack[] deadInv = player.getInventory().getContents();
-
-                event.getDrops().clear();
-
-
-                for (ItemStack item : deadInv) {
-
-                    Chest chest = (Chest) block.getState();
-                    Inventory chestInv = chest.getBlockInventory();
-                    if (item != null) {
-                        chestInv.addItem(item);
-                    }
-                }
-            }
+        // This is pretty cool isn't it huh
+        Arrays.stream(deadInv).filter(Objects::nonNull).forEach(chestInv::addItem);
     }
 }

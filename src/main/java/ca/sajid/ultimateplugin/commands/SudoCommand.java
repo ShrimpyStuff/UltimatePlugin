@@ -60,8 +60,8 @@ public class SudoCommand implements CommandExecutor, TabCompleter {
 
         switch (args.length) {
             case 1:
-                for(Player p : sender.getServer().getOnlinePlayers()) {
-                    if(!p.equals(sender)) opts.add(p.getName());
+                for (Player p : sender.getServer().getOnlinePlayers()) {
+                    if (!p.equals(sender)) opts.add(p.getName());
                 }
                 break;
             case 2:
