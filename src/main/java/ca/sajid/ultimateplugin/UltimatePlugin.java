@@ -4,10 +4,10 @@ import ca.sajid.ultimateplugin.commands.AuthorCommand;
 import ca.sajid.ultimateplugin.commands.InventoryCommand;
 import ca.sajid.ultimateplugin.commands.LightningCommand;
 import ca.sajid.ultimateplugin.commands.SudoCommand;
-import ca.sajid.ultimateplugin.modules.Backpacks;
 import ca.sajid.ultimateplugin.modules.DeadChest;
 import ca.sajid.ultimateplugin.modules.Moderation;
 import ca.sajid.ultimateplugin.modules.WelcomeMessage;
+import ca.sajid.ultimateplugin.modules.backpacks.Backpacks;
 import ca.sajid.ultimateplugin.util.ModuleManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
