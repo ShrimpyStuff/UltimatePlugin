@@ -29,4 +29,4 @@ permissions:
       up.inventory:
         description: Permission to use the inventory command
       up.sudo:
-        description: Permission to use the inventory command
+        description: Permission to use the sudo command
