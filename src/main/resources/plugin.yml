@@ -6,18 +6,26 @@ commands:
   author:
     description: Authors
     usage: /<command>
+    permission: up.authors
   sudo:
     description: Executes a command or a chat message as another player with full permissions
     usage: /<command> [player] [c:message | command]
+    permission: up.sudo
   inventory:
     description: See a player's inventory
     usage: /<command> [player]
     aliases: [ inv ]
+    permission: up.inventory
 
 permissions:
-  up.author:
-    default: true
-  up.inventory:
+  up.*:
+    description: Permission to use all UltimatePlugin commands
     default: op
-  up.sudo:
-    default: op
+    children:
+      up.author:
+        description: Permission to use the author command
+        default: true
+      up.inventory:
+        description: Permission to use the inventory command
+      up.sudo:
+        description: Permission to use the inventory command
