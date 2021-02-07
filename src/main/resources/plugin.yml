@@ -3,11 +3,8 @@ version: 1.0.0
 authors: [ ShrimpyStuff, ElCholoGamer ]
 main: ca.sajid.ultimateplugin.UltimatePlugin
 api-version: 1.16
+
 commands:
-  author:
-    description: Authors
-    usage: /<command>
-    permission: up.authors
   sudo:
     description: Executes a command or a chat message as another player with full permissions
     usage: /<command> [player] [c:message | command]
@@ -17,16 +14,19 @@ commands:
     usage: /<command> [player]
     aliases: [ inv ]
     permission: up.inventory
+  lightning:
+    description: Strikes lightning at the center of all loaded chunks
+    usage: /<command>
+    permission: up.lightning
 
 permissions:
   up.*:
     description: Permission to use all UltimatePlugin commands
     default: op
     children:
-      up.author:
-        description: Permission to use the author command
-        default: true
       up.inventory:
         description: Permission to use the inventory command
       up.sudo:
         description: Permission to use the sudo command
+      up.lightning:
+        description: Permission to use the lightning command
