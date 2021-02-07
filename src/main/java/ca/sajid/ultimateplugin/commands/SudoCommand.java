@@ -1,7 +1,7 @@
 package ca.sajid.ultimateplugin.commands;
 
+import ca.sajid.ultimateplugin.Utils;
 import ca.sajid.ultimateplugin.util.BaseCommand;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -21,12 +21,12 @@ public class SudoCommand extends BaseCommand {
 
         Player victim = sender.getServer().getPlayer(args[0]);
         if (victim == null) {
-            sender.sendMessage(ChatColor.RED + "Player not found");
+            sender.sendMessage(Utils.color("&cPlayer not found"));
             return true;
         }
 
         if (victim.equals(sender)) {
-            sender.sendMessage(ChatColor.RED + "You can't use /sudo on yourself");
+            sender.sendMessage(Utils.color("&cYou can't use /sudo on yourself"));
             return true;
         }
 
@@ -39,17 +39,17 @@ public class SudoCommand extends BaseCommand {
         if (action.startsWith("c:")) {
             // Chat message
             victim.chat(action.replaceFirst("c:", ""));
-            sender.sendMessage(ChatColor.YELLOW + "Message sent as " + name);
+            sender.sendMessage(Utils.color("&eMessage sent as &b" + name));
         } else {
             boolean op = victim.isOp();
             victim.setOp(true);
 
             if (victim.performCommand(action.replaceAll("^/", ""))) {
                 // Command successful
-                sender.sendMessage(ChatColor.YELLOW + "Command executed as " + name);
+                sender.sendMessage(Utils.color("&eCommand executed as &b" + name));
             } else {
                 // Command error
-                sender.sendMessage(ChatColor.RED + "Error while executing command as " + name);
+                sender.sendMessage(Utils.color("&cError while executing command as &b" + name));
             }
             victim.setOp(op);
         }

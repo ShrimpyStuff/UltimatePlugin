@@ -1,8 +1,8 @@
 package ca.sajid.ultimateplugin.modules.backpacks;
 
+import ca.sajid.ultimateplugin.Utils;
 import ca.sajid.ultimateplugin.util.BaseModule;
 import ca.sajid.ultimateplugin.util.CustomConfig;
-import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -47,7 +47,7 @@ public class Backpacks extends BaseModule {
         meta.setColor(Color.ORANGE);
 
         List<String> lore = new ArrayList<>();
-        lore.add(ChatColor.DARK_GRAY + "Do NOT multi-craft");
+        lore.add(Utils.color("&6Do NOT multi-craft"));
         meta.setLore(lore);
 
         backpack.setItemMeta(meta);
