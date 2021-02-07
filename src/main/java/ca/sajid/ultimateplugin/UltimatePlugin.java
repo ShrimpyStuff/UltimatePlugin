@@ -20,6 +20,8 @@ public final class UltimatePlugin extends JavaPlugin {
     public void onEnable() {
         plugin = this;
 
+        saveDefaultConfig();
+
         // Register commands
         new AuthorCommand().register();
         new SudoCommand().register();
