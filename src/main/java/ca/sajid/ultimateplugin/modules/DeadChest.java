@@ -28,7 +28,7 @@ public class DeadChest extends BaseModule implements Listener {
         PlayerInventory inv = player.getInventory();
         Block block = player.getLocation().getBlock();
 
-        if (inv.isEmpty() || !block.getType().equals(Material.AIR)) return;
+        if (inv.isEmpty() || !block.getType().equals(Material.AIR) || !block.getType().equals(Material.LAVA) || !block.getType().equals(Material.WATER)) return;
 
         block.setType(Material.CHEST);
         Chest chest = (Chest) block.getState();
