@@ -1,5 +1,6 @@
 package ca.sajid.ultimateplugin.modules;
 
+import ca.sajid.ultimateplugin.UltimatePlugin;
 import ca.sajid.ultimateplugin.util.BaseModule;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -17,6 +18,8 @@ import java.util.Objects;
 
 public class DeadChest extends BaseModule implements Listener {
 
+    private final UltimatePlugin plugin = UltimatePlugin.getPlugin();
+
     @Override
     public void onEnable() {
         getPlugin().getServer().getPluginManager().registerEvents(this, getPlugin());
@@ -24,6 +27,7 @@ public class DeadChest extends BaseModule implements Listener {
 
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent e) {
+        if (!plugin.getConfig().getBoolean("dead_chest")) return;
         Player player = e.getEntity();
         PlayerInventory inv = player.getInventory();
         Block block = player.getLocation().getBlock();
