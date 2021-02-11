@@ -27,7 +27,7 @@ public class Moderation extends BaseModule implements Listener {
         JsonElement root = Utils.fetch(url);
         JsonObject rootObj = root.getAsJsonObject();
         String text = rootObj.get("result").getAsString();
-
+        if (m.equals(text)) return;
         e.setMessage(ChatColor.translateAlternateColorCodes('&', text));
     }
 }
