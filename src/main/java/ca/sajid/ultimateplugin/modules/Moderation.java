@@ -1,5 +1,6 @@
 package ca.sajid.ultimateplugin.modules;
 
+import ca.sajid.ultimateplugin.UltimatePlugin;
 import ca.sajid.ultimateplugin.Utils;
 import ca.sajid.ultimateplugin.util.BaseModule;
 import com.google.gson.JsonElement;
@@ -14,6 +15,8 @@ import java.net.URLEncoder;
 
 public class Moderation extends BaseModule implements Listener {
 
+    private final UltimatePlugin plugin = UltimatePlugin.getPlugin();
+
     @Override
     public void onEnable() {
         getPlugin().getServer().getPluginManager().registerEvents(this, getPlugin());
@@ -21,6 +24,7 @@ public class Moderation extends BaseModule implements Listener {
 
     @EventHandler
     public void onChatMessage(AsyncPlayerChatEvent e) throws IOException {
+        if (!plugin.getConfig().getBoolean("moderation")) return;
         String m = e.getMessage();
         String url = "https://www.purgomalum.com/service/json?text=" + URLEncoder.encode(m, "UTF-8");
 

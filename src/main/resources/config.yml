@@ -2,3 +2,4 @@
 join_message: '&b{player} &ejoined the server!'
 quit_message: '&b{player} &eleft the server'
 dead_chest: false
+moderation: false
