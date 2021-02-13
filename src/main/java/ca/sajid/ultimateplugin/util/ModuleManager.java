@@ -12,7 +12,7 @@ public class ModuleManager {
     public <T extends BaseModule> T load(Class<T> clazz) {
         try {
             Constructor<T> constructor = clazz.getConstructor();
-            BaseModule module = constructor.newInstance();
+            T module = constructor.newInstance();
             modules.add(module);
 
             module.onEnable();
