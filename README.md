@@ -7,4 +7,4 @@ Has swear filtering, and other random stuff. The only useful part is the swear f
 Not completed
 
 To install a certain maven dependency use `mvn install:install-file -DgroupId=org.spigotmc -Dpackaging=jar -Dfile=path\to\file.jar -DartifactId=spigot -DgeneratePom=true -Dversion=1.16.5-R0.1-SNAPSHOT`
-(Get the JAR [Here](https://github.com/ShrimpyStuff/UltimatePlugin/blob/master/lib/spigot-1.16.5-R0.1-SNAPSHOT.java))
+(Get the JAR [Here](https://github.com/ShrimpyStuff/UltimatePlugin/blob/master/lib/spigot-1.16.5-R0.1-SNAPSHOT.jar))
