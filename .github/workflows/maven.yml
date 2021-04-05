@@ -15,7 +15,7 @@ jobs:
         java-version: 1.8
 
     - name: Install with Maven
-      run: mvn install:install-file -DgroupId=org.spigotmc -Dpackaging=jar -Dfile=./lib/spigot-1.16.5-R0.1-SNAPSHOT.jar -DartifactId=spigot -DgeneratePom=true
+      run: mvn install:install-file -DgroupId=org.spigotmc -Dpackaging=jar -Dfile=./lib/spigot-1.16.5-R0.1-SNAPSHOT.jar -DartifactId=spigot -DgeneratePom=true -Dversion=1.16.5-R0.1-SNAPSHOT
       
     - name: Build with Maven
       run: mvn -B --no-transfer-progress package
