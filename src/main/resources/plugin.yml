@@ -18,6 +18,10 @@ commands:
     description: Strikes lightning at the center of all loaded chunks
     usage: /<command>
     permission: up.lightning
+  npc:
+    description: Spawns Sans
+    usage: /<command>
+    permission: up.npc
 
 permissions:
   up.*:
@@ -30,3 +34,5 @@ permissions:
         description: Permission to use the sudo command
       up.lightning:
         description: Permission to use the lightning command
+      up.npc:
+        description: Permission to use the npc command

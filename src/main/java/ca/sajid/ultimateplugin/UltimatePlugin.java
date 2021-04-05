@@ -1,9 +1,6 @@
 package ca.sajid.ultimateplugin;
 
-import ca.sajid.ultimateplugin.commands.AuthorCommand;
-import ca.sajid.ultimateplugin.commands.InventoryCommand;
-import ca.sajid.ultimateplugin.commands.LightningCommand;
-import ca.sajid.ultimateplugin.commands.SudoCommand;
+import ca.sajid.ultimateplugin.commands.*;
 import ca.sajid.ultimateplugin.modules.DeadChest;
 import ca.sajid.ultimateplugin.modules.Moderation;
 import ca.sajid.ultimateplugin.modules.WelcomeMessage;
@@ -27,6 +24,7 @@ public final class UltimatePlugin extends JavaPlugin {
         new SudoCommand().register();
         new InventoryCommand().register();
         new LightningCommand().register();
+        new NPCCommand().register();
 
         modules.load(Backpacks.class);
         modules.load(DeadChest.class);
