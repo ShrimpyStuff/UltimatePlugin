@@ -2,6 +2,7 @@ package ca.sajid.ultimateplugin.modules;
 
 import ca.sajid.ultimateplugin.UltimatePlugin;
 import ca.sajid.ultimateplugin.util.BaseModule;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
@@ -29,6 +30,7 @@ public class DeadChest extends BaseModule implements Listener {
     public void onPlayerDeath(PlayerDeathEvent e) {
         if (!plugin.getConfig().getBoolean("dead_chest")) return;
         Player player = e.getEntity();
+        if (player.getGameMode() == GameMode.CREATIVE) return;
         PlayerInventory inv = player.getInventory();
         Block block = player.getLocation().getBlock();
 
