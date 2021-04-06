@@ -11,6 +11,7 @@ import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -19,11 +20,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.UUID;
 
 public class SansAI extends BaseModule implements Listener {
-    static GameProfile gameProfile;
-    static EntityPlayer npc;
+    static GameProfile Sans_gameProfile;
+    static EntityPlayer SANS_NPC;
+    static boolean enabled = true;
 
     @Override
     public void onEnable() {
@@ -33,16 +36,26 @@ public class SansAI extends BaseModule implements Listener {
 
     public static void npcPacket() {
         MinecraftServer nmsServer = ((CraftServer) Bukkit.getServer()).getServer();
-        WorldServer nmsWorld = ((CraftWorld) Bukkit.getWorld("world")).getHandle();
-        gameProfile = new GameProfile(UUID.randomUUID(), "Sans");
-        npc = new EntityPlayer(nmsServer, nmsWorld, gameProfile, new PlayerInteractManager(nmsWorld));
-        npc.setLocation(nmsWorld.getSpawn().getX(), nmsWorld.getSpawn().getY(), nmsWorld.getSpawn().getZ(), 0, 0);
+        WorldServer nmsWorld = ((CraftWorld) Objects.requireNonNull(Bukkit.getWorld("world"))).getHandle();
+        Sans_gameProfile = new GameProfile(UUID.randomUUID(), "Sans");
+        SANS_NPC = new EntityPlayer(nmsServer, nmsWorld, Sans_gameProfile, new PlayerInteractManager(nmsWorld));
+        SANS_NPC.setLocation(nmsWorld.getSpawn().getX(), nmsWorld.getSpawn().getY(), nmsWorld.getSpawn().getZ(), 0, 0);
     }
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
-        sendSetNPCSkinPacket(npc, e.getPlayer(), gameProfile, "SushiCat22");
-        addNPCPacket(npc, e.getPlayer());
+        if (!enabled) return;
+        sendSetNPCSkinPacket(SANS_NPC, e.getPlayer(), Sans_gameProfile, "SushiCat22");
+        addNPCPacket(SANS_NPC, e.getPlayer());
+    }
+
+    @EventHandler
+    public void onChatMessage(AsyncPlayerChatEvent e) {
+        if (e.getMessage().equals("Sans, You win.")) {
+            for (Player player : Objects.requireNonNull(Bukkit.getWorld("world")).getPlayers())
+            removeNPCPacket(SANS_NPC, player);
+            enabled = false;
+        }
     }
 
 
