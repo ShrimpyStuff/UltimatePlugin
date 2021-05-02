@@ -12,9 +12,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import org.bukkit.inventory.meta.ItemMeta;
 
 
 public class Garage extends BaseModule implements Listener {
@@ -36,7 +34,9 @@ public class Garage extends BaseModule implements Listener {
 
         for (int i = 0; i < 9; i++) {
             ItemStack horse = new ItemStack(Material.HORSE_SPAWN_EGG, 1);
-            horse.getItemMeta().setDisplayName(garages.get().getString(player.getName() + "." + i + ".CustomName"));
+            ItemMeta meta  = horse.getItemMeta();
+            meta.setDisplayName(garages.get().getString(player.getName() + "." + i + ".CustomName"));
+            horse.setItemMeta(meta);
             garage.setItem(i, horse);
         }
 
@@ -49,12 +49,11 @@ public class Garage extends BaseModule implements Listener {
     public void onInventoryClick(InventoryClickEvent e) {
         if (e.getClickedInventory() != garageForOtherCheck) return;
         e.getWhoClicked().closeInventory();
-        ItemStack horse = e.getClickedInventory().getItem(e.getSlot());
         Horse entity = (Horse) e.getWhoClicked().getWorld().spawnEntity(e.getWhoClicked().getLocation(), EntityType.HORSE);
         entity.setCustomName(garages.get().getString(e.getWhoClicked().getName() + "." + e.getSlot() + ".CustomName"));
         entity.setColor(Horse.Color.BLACK);
         entity.setJumpStrength(1);
-        entity.setStyle(Horse.Style.WHITE_DOTS);
-        entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(1);
+        entity.setStyle(Horse.Style.valueOf(garages.get().getString(e.getWhoClicked().getName() + "." + e.getSlot() + ".Horse_Style")));
+        entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(garages.get().getInt(e.getWhoClicked().getName() + "." + e.getSlot() + ".GENERIC_MOVEMENT_SPEED"));
     }
 }
