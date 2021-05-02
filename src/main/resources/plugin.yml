@@ -18,6 +18,9 @@ commands:
     description: Strikes lightning at the center of all loaded chunks
     usage: /<command>
     permission: up.lightning
+  horses:
+    permission: up.horses
+    usage: /<command>
 
 permissions:
   up.*:
@@ -30,3 +33,5 @@ permissions:
         description: Permission to use the sudo command
       up.lightning:
         description: Permission to use the lightning command
+      up.horses:
+        default: true

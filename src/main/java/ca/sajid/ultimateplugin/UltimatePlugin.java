@@ -6,6 +6,7 @@ import ca.sajid.ultimateplugin.modules.Moderation;
 import ca.sajid.ultimateplugin.modules.SansAI;
 import ca.sajid.ultimateplugin.modules.WelcomeMessage;
 import ca.sajid.ultimateplugin.modules.backpacks.Backpacks;
+import ca.sajid.ultimateplugin.modules.horseGarage.Garage;
 import ca.sajid.ultimateplugin.util.ModuleManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -25,12 +26,14 @@ public final class UltimatePlugin extends JavaPlugin {
         new SudoCommand().register();
         new InventoryCommand().register();
         new LightningCommand().register();
+        new HorseGarageCommand().register();
 
         modules.load(Backpacks.class);
         modules.load(DeadChest.class);
         modules.load(Moderation.class);
         modules.load(WelcomeMessage.class);
         modules.load(SansAI.class);
+        modules.load(Garage.class);
 
         Utils.log("&a%s v%s enabled!", getName(), getDescription().getVersion());
     }

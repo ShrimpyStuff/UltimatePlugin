@@ -14,12 +14,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import javax.net.ssl.HttpsURLConnection;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.util.ArrayList;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -45,7 +39,7 @@ public class SansAI extends BaseModule implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
         if (!enabled) return;
-        sendSetNPCSkinPacket(SANS_NPC, e.getPlayer(), Sans_gameProfile, "SushiCat22");
+        sendSetNPCSkinPacket(SANS_NPC, e.getPlayer(), Sans_gameProfile);
         addNPCPacket(SANS_NPC, e.getPlayer());
     }
 
@@ -71,28 +65,10 @@ public class SansAI extends BaseModule implements Listener {
         connection.sendPacket(new PacketPlayOutEntityDestroy(npc.getId()));
     }
 
-    public static void sendSetNPCSkinPacket(EntityPlayer npc, Player player, GameProfile profile, String username) { // The username is the name for the player that has the skin.
-        removeNPCPacket(npc, player);
-
-        try {
-            HttpsURLConnection connection = (HttpsURLConnection) new URL(String.format("https://api.ashcon.app/mojang/v2/user/%s", username)).openConnection();
-            if (connection.getResponseCode() == HttpsURLConnection.HTTP_OK) {
-                ArrayList<String> lines = new ArrayList<>();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                reader.lines().forEach(lines::add);
-
-                String reply = String.join(" ", lines);
-                int indexOfValue = reply.indexOf("\"value\": \"");
-                int indexOfSignature = reply.indexOf("\"signature\": \"");
-                String skin = reply.substring(indexOfValue + 10, reply.indexOf("\"", indexOfValue + 10));
-                String signature = reply.substring(indexOfSignature + 14, reply.indexOf("\"", indexOfSignature + 14));
-
+    public static void sendSetNPCSkinPacket(EntityPlayer npc, Player player, GameProfile profile) { // The username is the name for the player that has the skin.
+                removeNPCPacket(npc, player);
+                String skin = "ewogICJ0aW1lc3RhbXAiIDogMTYxOTk3MTI1MTcyMSwKICAicHJvZmlsZUlkIiA6ICI1MGE4OWY4MjBlM2E0YTY5YWNjMTQ2OGMzYzE2NDIxYSIsCiAgInByb2ZpbGVOYW1lIiA6ICJTdXNoaUNhdDIyIiwKICAic2lnbmF0dXJlUmVxdWlyZWQiIDogdHJ1ZSwKICAidGV4dHVyZXMiIDogewogICAgIlNLSU4iIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlLzgyMDEzNmI1ZTUwZWQzMWYxZGQ5MDJjZGRjMWJiMzdmN2UxZjU5ZTI2OWUwNTEzZDQyMmU3MmNhYTA5N2ZjZTUiCiAgICB9CiAgfQp9";
+                String signature = "qWxovMq30IqVh1n50KrO00w6Q67OxRABVWiTickHz84JENXPSJw+Dx5trQs2n9pfhDZDygv/z7/cjHWrK1OMOO7CPnSbr6pH3NKHLc/6RVGlGBBvWO2hw7Gl+aTwVx7Ieh5koKOPumcZ9Wv/MxfO/SR4EfelSErGBzteTrtQ6E5Gt+1bwR+cNES2UixMOqPPcBDABing/m2dQoU8ytQRh91djdh/EU5+BO9ekgz+mWNJyVo7ac9yO7ZvyQqKNg+8NZ0v7SSsl6c9gq1ERZE/yzUwTG4mGoDvbtXvZhe0X1w5NzATt6yO4eoUMyrWpGFZpUsazAy+2PHIc4roLIDg856cXIUyMb6wgI4SjaSPxpPPCDIGLzzfx1vgnPVlapg6THoVBaq+ZQkFqOJ3BOjJbTgeF0z7B5JoKB01rbVUHQJgXviKqO6j7+NCr05t4vQNSPdSdFMdPRMVUCLmtK2AqkxQc2ggJdapW1R1XJMs5/G949YUWTnDPPLF/kA5sSgFb20YS+WdpLQcEra2SpCRxmJFQ/AiUoh46QENB8ArwJKvEJ/1Cs8H3SRovpMoMO6pyZtUebt9CI4xmGl470FlNbOFsPCjh/VmNg0+1omesNnM4D5Yxf8P4C8qx9BvsCEn1PDgr78KhU96sgCJ+64kmeRBZPONl+ZWa0TZ3DnX7gM=";
                 profile.getProperties().put("textures", new Property("textures", skin, signature));
-            } else {
-                Bukkit.getConsoleSender().sendMessage("Connection could not be opened when fetching player skin (Response code " + connection.getResponseCode() + ", " + connection.getResponseMessage() + ")");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }
