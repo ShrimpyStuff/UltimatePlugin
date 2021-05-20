@@ -27,6 +27,7 @@ public final class UltimatePlugin extends JavaPlugin {
         new InventoryCommand().register();
         new LightningCommand().register();
         new HorseGarageCommand().register();
+        new SansCommand().register();
 
         modules.load(Backpacks.class);
         modules.load(DeadChest.class);

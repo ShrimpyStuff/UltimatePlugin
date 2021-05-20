@@ -21,6 +21,9 @@ commands:
   horses:
     permission: up.horses
     usage: /<command>
+  sans:
+    permission: up.sans
+    usage: /<command>
 
 permissions:
   up.*:
@@ -35,3 +38,6 @@ permissions:
         description: Permission to use the lightning command
       up.horses:
         default: true
+        description: Permission to use the horses command
+      up.sans:
+        description: Permission to use the sans command
