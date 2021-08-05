@@ -3,12 +3,19 @@ package ca.sajid.ultimateplugin.modules;
 import ca.sajid.ultimateplugin.util.BaseModule;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
-import net.minecraft.server.v1_16_R3.*;
+import net.minecraft.network.protocol.game.*;
+import net.minecraft.network.syncher.DataWatcher;
+import net.minecraft.network.syncher.DataWatcherObject;
+import net.minecraft.network.syncher.DataWatcherRegistry;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.EntityPlayer;
+import net.minecraft.server.level.WorldServer;
+import net.minecraft.server.network.PlayerConnection;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_16_R3.CraftServer;
-import org.bukkit.craftbukkit.v1_16_R3.CraftWorld;
-import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_17_R1.CraftServer;
+import org.bukkit.craftbukkit.v1_17_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_17_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -22,7 +29,7 @@ public class SansAI extends BaseModule implements Listener {
     static MinecraftServer nmsServer = ((CraftServer) Bukkit.getServer()).getServer();
     static WorldServer nmsWorld = ((CraftWorld) Objects.requireNonNull(Bukkit.getWorld("world"))).getHandle();
     static GameProfile gameProfile = new GameProfile(UUID.randomUUID(), "Sans");
-    static EntityPlayer npc = new EntityPlayer(nmsServer, nmsWorld, gameProfile, new PlayerInteractManager(nmsWorld)); // This will be the EntityPlayer (NPC) we send with the sendNPCPacket method.
+    static EntityPlayer npc = new EntityPlayer(nmsServer, nmsWorld, gameProfile);
 
     @Override
     public void onEnable() {
@@ -45,14 +52,14 @@ public class SansAI extends BaseModule implements Listener {
     }
 
     public static void addNPCPacket(EntityPlayer npc, Player player) {
-        PlayerConnection connection = ((CraftPlayer)player).getHandle().playerConnection;
-        connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, npc)); // "Adds the player data for the client to use when spawning a player" - https://wiki.vg/Protocol#Spawn_Player
+        PlayerConnection connection = ((CraftPlayer)player).getHandle().b;
+        connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.a, npc)); // "Adds the player data for the client to use when spawning a player" - https://wiki.vg/Protocol#Spawn_Player
         connection.sendPacket(new PacketPlayOutNamedEntitySpawn(npc)); // Spawns the NPC for the player client.
-        connection.sendPacket(new PacketPlayOutEntityHeadRotation(npc, (byte) (npc.yaw * 256 / 360))); // Correct head rotation when spawned in player look direction.
+        connection.sendPacket(new PacketPlayOutEntityHeadRotation(npc, (byte) (npc.getBukkitYaw() * 256 / 360))); // Correct head rotation when spawned in player look direction.
     }
 
-    public static void removeNPCPacket(Entity npc, Player player) {
-        PlayerConnection connection = ((CraftPlayer)player).getHandle().playerConnection;
+    public static void removeNPCPacket(EntityPlayer npc, Player player) {
+        PlayerConnection connection = ((CraftPlayer)player).getHandle().b;
         connection.sendPacket(new PacketPlayOutEntityDestroy(npc.getId()));
     }
 
@@ -66,7 +73,7 @@ public class SansAI extends BaseModule implements Listener {
         DataWatcher watcher = npc.getDataWatcher();
         watcher.set(new DataWatcherObject<>(15, DataWatcherRegistry.a), (byte)127);
         PacketPlayOutEntityMetadata packet = new PacketPlayOutEntityMetadata(npc.getId(), watcher, true);
-        ((CraftPlayer)player).getHandle().playerConnection.sendPacket(packet);
+        ((CraftPlayer)player).getHandle().b.sendPacket(packet);
 
         addNPCPacket(npc, player);
     }
