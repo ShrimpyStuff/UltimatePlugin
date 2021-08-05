@@ -59,8 +59,8 @@ public class SansAI extends BaseModule implements Listener {
     public static void sendSetNPCSkinPacket(EntityPlayer npc, Player player) { // The username is the name for the player that has the skin.
         removeNPCPacket(npc, player);
 
-        String skin = "";
-        String signature = "";
+        String skin = "ewogICJ0aW1lc3RhbXAiIDogMTYyODEyNzg2OTEwNiwKICAicHJvZmlsZUlkIiA6ICI1MGE4OWY4MjBlM2E0YTY5YWNjMTQ2OGMzYzE2NDIxYSIsCiAgInByb2ZpbGVOYW1lIiA6ICJTdXNoaUNhdDIyIiwKICAic2lnbmF0dXJlUmVxdWlyZWQiIDogdHJ1ZSwKICAidGV4dHVyZXMiIDogewogICAgIlNLSU4iIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlLzgyMDEzNmI1ZTUwZWQzMWYxZGQ5MDJjZGRjMWJiMzdmN2UxZjU5ZTI2OWUwNTEzZDQyMmU3MmNhYTA5N2ZjZTUiCiAgICB9CiAgfQp9";
+        String signature = "DyIluQsJinkcrk9buajddNRtV3vbvwwP3QYjogrOs3JwAwm+L8lihTNOETUm0OA42+qXQ5R4Ktrbq47rgHT7ymn567dKTeDj8FgdMKjO5Tq8XO0KAKMx83QIrNM15j1DRYfxaz/5osiyz3IgzANmegAdjkiWpg5qZPf91MLqVhW9cdl33Q1lrd9vhY4r4w8ajVcF10vzo0SMBkRbMcf0LqLLFxMwfSY7Fsy4Fu3GifvpGf5pDsLRcrShK/m1qulwIefKBVyo0gdQ4oZ4uzjaiVBzYvOnAmy6hWPFglb6Hel+Oc445J+ZNGBB2rxWI+2h69iXT3Rz+B17hyCn5nXcA4MrSviaP2t0V51JEl/kPzk4/yew1NuNxrsMirB1wMfY7+4fbV4N2qR3/Ms4aE0+TBu6LLOGf/ijNELavf6R4G+etJxdmE8nESOHNzV6l7NDe2zFtMXpRpURqJ3HxLUwvdwHJIsuAxFEK9PtY+Cv4AQRqernE/OADP/eaMjiGN72Ky7kUcvTY1qDMiOEGf+cBwoNbuHcnSXgJ7u3vl+EnCXVYRZD9WMxzb19bmft8fHkVAFgwo5AEvaTXHYX2jylBBGHgq7zbp8HAO5/3GBz8XQ2Knc3PNyS90BO+o31W9VOoH7A6EoQ3AWV7ppStn8kyuVIIGglmOjPZI2WHLWSRKY=";
         gameProfile.getProperties().put("textures", new Property("textures", skin, signature));
 
         DataWatcher watcher = npc.getDataWatcher();
