@@ -54,7 +54,7 @@ public class SansAI extends BaseModule implements Listener {
     public static void addNPCPacket(EntityPlayer npc, Player player) {
         PlayerConnection connection = ((CraftPlayer)player).getHandle().b;
         connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.a, npc)); // "Adds the player data for the client to use when spawning a player" - https://wiki.vg/Protocol#Spawn_Player
-        connection.sendPacket(new PacketPlayOutNamedEntitySpawn(npc)); // Spawns the NPC for the player client.
+        connection.sendPacket(new PacketPlayOutNamedEntitySpawn(npc));
         connection.sendPacket(new PacketPlayOutEntityHeadRotation(npc, (byte) (npc.getBukkitYaw() * 256 / 360))); // Correct head rotation when spawned in player look direction.
     }
 
@@ -71,7 +71,7 @@ public class SansAI extends BaseModule implements Listener {
         gameProfile.getProperties().put("textures", new Property("textures", skin, signature));
 
         DataWatcher watcher = npc.getDataWatcher();
-        watcher.set(new DataWatcherObject<>(15, DataWatcherRegistry.a), (byte)127);
+        watcher.set(DataWatcherRegistry.a.a(17), (byte)0);
         PacketPlayOutEntityMetadata packet = new PacketPlayOutEntityMetadata(npc.getId(), watcher, true);
         ((CraftPlayer)player).getHandle().b.sendPacket(packet);
 
