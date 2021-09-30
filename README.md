@@ -1,4 +1,4 @@
-# UltimatePlugin &middot; ![CI status](https://github.com/ShrimpyStuff/UltimatePlugin/workflows/CI/badge.svg)
+# UltimatePlugin &middot; ![Maven status](https://github.com/ShrimpyStuff/UltimatePlugin/workflows/Maven/badge.svg)
 
 The random plugin I made with my friend.
 
