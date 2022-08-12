@@ -1,3 +1,4 @@
+/*
 package ca.sajid.ultimateplugin.commands;
 
 import ca.sajid.ultimateplugin.util.BaseCommand;
@@ -20,3 +21,4 @@ public class SansCommand extends BaseCommand {
         return true;
     }
 }
+*/

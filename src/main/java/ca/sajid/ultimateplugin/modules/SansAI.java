@@ -1,4 +1,4 @@
-package ca.sajid.ultimateplugin.modules;
+/*package ca.sajid.ultimateplugin.modules;
 
 import ca.sajid.ultimateplugin.util.BaseModule;
 import com.mojang.authlib.GameProfile;
@@ -78,3 +78,4 @@ public class SansAI extends BaseModule implements Listener {
         addNPCPacket(npc, player);
     }
 }
+ */
