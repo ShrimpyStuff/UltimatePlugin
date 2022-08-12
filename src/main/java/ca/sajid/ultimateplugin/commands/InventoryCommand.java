@@ -15,6 +15,8 @@ public class InventoryCommand extends BaseCommand {
 
     @Override
     public boolean execute(CommandSender sender, Command cmd, String label, String[] args) {
+        if (args.length < 1) return false;
+
         Player target = sender.getServer().getPlayer(args[0]);
 
         if (target == null) {

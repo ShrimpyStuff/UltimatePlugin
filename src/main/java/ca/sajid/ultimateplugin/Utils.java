@@ -28,7 +28,7 @@ public class Utils {
         con.connect();
 
         InputStreamReader data = new InputStreamReader((InputStream) con.getContent());
-        return new JsonParser().parse(data);
+        return JsonParser.parseReader(data);
     }
 
     public static String color(String s) {
@@ -36,8 +36,8 @@ public class Utils {
             // Check that class and method exist
             Class.forName("net.md_5.bungee.api.ChatColor").getMethod("of", String.class);
 
-            // regex is cool isnt it
-            Pattern pattern = Pattern.compile("#[a-fA-F0-9]{6}");
+            // regex is cool isn't it
+            Pattern pattern = Pattern.compile("#[a-fA-F\\d]{6}");
             Matcher matcher = pattern.matcher(s);
 
             while (matcher.find()) {

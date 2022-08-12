@@ -3,7 +3,7 @@ package ca.sajid.ultimateplugin;
 import ca.sajid.ultimateplugin.commands.*;
 import ca.sajid.ultimateplugin.modules.DeadChest;
 import ca.sajid.ultimateplugin.modules.Moderation;
-import ca.sajid.ultimateplugin.modules.SansAI;
+//import ca.sajid.ultimateplugin.modules.SansAI;
 import ca.sajid.ultimateplugin.modules.WelcomeMessage;
 import ca.sajid.ultimateplugin.modules.backpacks.Backpacks;
 import ca.sajid.ultimateplugin.modules.horseGarage.Garage;
@@ -27,13 +27,13 @@ public final class UltimatePlugin extends JavaPlugin {
         new InventoryCommand().register();
         new LightningCommand().register();
         new HorseGarageCommand().register();
-        new SansCommand().register();
+        //new SansCommand().register();
 
         modules.load(Backpacks.class);
         modules.load(DeadChest.class);
         modules.load(Moderation.class);
         modules.load(WelcomeMessage.class);
-        modules.load(SansAI.class);
+        //modules.load(SansAI.class);
         modules.load(Garage.class);
 
         Utils.log("&a%s v%s enabled!", getName(), getDescription().getVersion());

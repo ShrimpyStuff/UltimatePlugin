@@ -6,6 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Horse;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -13,6 +14,8 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.Objects;
 
 
 public class Garage extends BaseModule implements Listener {
@@ -35,7 +38,9 @@ public class Garage extends BaseModule implements Listener {
         for (int i = 0; i < 9; i++) {
             ItemStack horse = new ItemStack(Material.HORSE_SPAWN_EGG, 1);
             ItemMeta meta  = horse.getItemMeta();
-            meta.setDisplayName(garages.get().getString(player.getName() + "." + i + ".CustomName"));
+            if (meta != null) {
+                meta.setDisplayName(garages.get().getString(player.getName() + "." + i + ".CustomName"));
+            }
             horse.setItemMeta(meta);
             garage.setItem(i, horse);
         }
@@ -48,12 +53,21 @@ public class Garage extends BaseModule implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent e) {
         if (e.getClickedInventory() != garageForOtherCheck) return;
-        e.getWhoClicked().closeInventory();
-        Horse entity = (Horse) e.getWhoClicked().getWorld().spawnEntity(e.getWhoClicked().getLocation(), EntityType.HORSE);
-        entity.setCustomName(garages.get().getString(e.getWhoClicked().getName() + "." + e.getSlot() + ".CustomName"));
+        HumanEntity whoClicked = e.getWhoClicked();
+        whoClicked.closeInventory();
+        Horse entity = (Horse) whoClicked.getWorld().spawnEntity(whoClicked.getLocation(), EntityType.HORSE);
+        String customName = garages.get().getString(whoClicked.getName() + "." + e.getSlot() + ".CustomName");
+        if (customName == null) customName = "";
+        entity.setCustomName(customName);
         entity.setColor(Horse.Color.BLACK);
         entity.setJumpStrength(1);
-        entity.setStyle(Horse.Style.valueOf(garages.get().getString(e.getWhoClicked().getName() + "." + e.getSlot() + ".Horse_Style")));
-        entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(garages.get().getInt(e.getWhoClicked().getName() + "." + e.getSlot() + ".GENERIC_MOVEMENT_SPEED"));
+        String style = garages.get().getString(whoClicked.getName() + "." + e.getSlot() + ".Horse_Style");
+        if (style != null) {
+            entity.setStyle(Horse.Style.valueOf(style));
+        }
+        int moveSpeed = garages.get().getInt(whoClicked.getName() + "." + e.getSlot() + ".GENERIC_MOVEMENT_SPEED");
+        if (moveSpeed != 0) {
+            Objects.requireNonNull(entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED)).setBaseValue(moveSpeed);
+        }
     }
 }

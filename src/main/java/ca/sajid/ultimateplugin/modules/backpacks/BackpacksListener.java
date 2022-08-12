@@ -28,7 +28,7 @@ public class BackpacksListener implements Listener {
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent e) {
-        // Check that player used right clicked
+        // Check that player used right-click
         Action action = e.getAction();
         if (!action.toString().contains("RIGHT_CLICK")) return;
 
@@ -41,7 +41,7 @@ public class BackpacksListener implements Listener {
         if (mainItem.getType() != Material.LEATHER_CHESTPLATE) return;
 
         ItemMeta meta = mainItem.getItemMeta();
-        if (meta == null || !meta.getDisplayName().matches("Backpack #[0-9]+")) return;
+        if (meta == null || !meta.getDisplayName().matches("Backpack #\\d+")) return;
 
         // Check that no other interactable block was clicked
         Block clicked = e.getClickedBlock();
@@ -76,7 +76,7 @@ public class BackpacksListener implements Listener {
     @EventHandler
     public void onInventoryClosed(InventoryCloseEvent e) {
         String title = e.getView().getTitle();
-        if (!title.matches("Backpack #[0-9]+")) return;
+        if (!title.matches("Backpack #\\d+")) return;
 
         String backpackIndex = title.split("#")[1];
 
