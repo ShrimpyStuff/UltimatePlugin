@@ -28,7 +28,7 @@ public class InventoryCommand extends BaseCommand {
 
         // Use .equals() for objects
         if (target.equals(player)) {
-            sender.sendMessage(Utils.color("&cCan't access your own inventory"));
+            sender.sendMessage(Utils.color("&cCan't access your own inventory (Just click e)"));
             return true;
         }
 

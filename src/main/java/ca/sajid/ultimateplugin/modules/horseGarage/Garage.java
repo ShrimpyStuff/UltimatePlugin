@@ -4,10 +4,7 @@ import ca.sajid.ultimateplugin.util.BaseModule;
 import ca.sajid.ultimateplugin.util.CustomConfig;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Horse;
-import org.bukkit.entity.HumanEntity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -17,10 +14,11 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Objects;
 
+import static ca.sajid.ultimateplugin.Utils.log;
+
 
 public class Garage extends BaseModule implements Listener {
     private static final CustomConfig garages = new CustomConfig("horseGarages.yml");
-    private static Inventory garageForOtherCheck;
 
     @Override
     public void onEnable() {
@@ -32,7 +30,7 @@ public class Garage extends BaseModule implements Listener {
         Inventory garage = player.getServer().createInventory(
                 player,
                 9,
-                "Your Horse Garage"
+                player.getName() + "'s horse garage"
         );
 
         for (int i = 0; i < 9; i++) {
@@ -45,14 +43,24 @@ public class Garage extends BaseModule implements Listener {
             garage.setItem(i, horse);
         }
 
-        garageForOtherCheck = garage;
-
         player.openInventory(garage);
+    }
+
+    public static void addHorseToGarage(Player player, Entity horse) {
+        log("Ok");
+        log(horse);
+        garages.get().set(player.getName() + "." + (garages.get().get(player.getName())), "I am a horse with the name " + horse.getCustomName());
+
+        garages.save();
+    }
+
+    public static void horseDeath(Player player, Entity horse) {
+
     }
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent e) {
-        if (e.getClickedInventory() != garageForOtherCheck) return;
+        if (e.getView().getTitle().equals(e.getWhoClicked().getName() + "'s horse garage")) return;
         HumanEntity whoClicked = e.getWhoClicked();
         whoClicked.closeInventory();
         Horse entity = (Horse) whoClicked.getWorld().spawnEntity(whoClicked.getLocation(), EntityType.HORSE);
