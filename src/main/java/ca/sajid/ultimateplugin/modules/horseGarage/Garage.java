@@ -49,7 +49,9 @@ public class Garage extends BaseModule implements Listener {
     public static void addHorseToGarage(Player player, Entity horse) {
         log("Ok");
         log(horse);
-        garages.get().set(player.getName() + "." + (garages.get().get(player.getName())), "I am a horse with the name " + horse.getCustomName());
+        if (garages.get().getConfigurationSection(player.getName()) != null) {
+            garages.get().set(player.getName() + "." + (Objects.requireNonNull(garages.get().getConfigurationSection(player.getName())).getKeys(false).size()), "I am a horse with the name " + horse.getCustomName());
+        }
 
         garages.save();
     }
@@ -60,10 +62,15 @@ public class Garage extends BaseModule implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent e) {
-        if (e.getView().getTitle().equals(e.getWhoClicked().getName() + "'s horse garage")) return;
+        log(e.getView().getTitle());
+        log(e.getWhoClicked().getName() + "'s horse garage");
+        if (!e.getView().getTitle().equals(e.getWhoClicked().getName() + "'s horse garage")) return;
         HumanEntity whoClicked = e.getWhoClicked();
         whoClicked.closeInventory();
+        if (garages.get().get(whoClicked.getName() + "." + e.getSlot()) == null) { return; }
         Horse entity = (Horse) whoClicked.getWorld().spawnEntity(whoClicked.getLocation(), EntityType.HORSE);
+        entity.isTamed();
+        entity.setOwner(whoClicked);
         String customName = garages.get().getString(whoClicked.getName() + "." + e.getSlot() + ".CustomName");
         if (customName == null) customName = "";
         entity.setCustomName(customName);
