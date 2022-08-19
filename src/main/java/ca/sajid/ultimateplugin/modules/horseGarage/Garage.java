@@ -16,8 +16,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Objects;
 
-import static ca.sajid.ultimateplugin.Utils.log;
-
 
 public class Garage extends BaseModule implements Listener {
     private static final CustomConfig garages = new CustomConfig("horseGarages.yml");
@@ -67,6 +65,7 @@ public class Garage extends BaseModule implements Listener {
         config.set(defaultKey + ".Invulnerable", horse.isInvulnerable());
 
         garages.save();
+        horse.remove();
     }
 
     public static void horseDeath(Player player, Entity horse) {
