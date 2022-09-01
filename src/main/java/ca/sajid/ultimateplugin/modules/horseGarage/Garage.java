@@ -9,6 +9,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -48,6 +49,10 @@ public class Garage extends BaseModule implements Listener {
     }
 
     public static void addHorseToGarage(Player player, Horse horse) {
+        if (garages.get().contains(horse.getUniqueId().toString())) {
+            player.sendMessage("This horse is already registered");
+            return;
+        }
         FileConfiguration config = garages.get();
         ConfigurationSection configSec = config.getConfigurationSection(player.getName());
         int index = 0;
@@ -63,13 +68,25 @@ public class Garage extends BaseModule implements Listener {
         config.set(defaultKey + ".GENERIC_MAX_HEALTH", Objects.requireNonNull(horse.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getBaseValue());
         config.set(defaultKey + ".GENERIC_MOVEMENT_SPEED", Objects.requireNonNull(horse.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED)).getBaseValue());
         config.set(defaultKey + ".Invulnerable", horse.isInvulnerable());
+        config.set(defaultKey + ".Saddle", horse.getInventory().getSaddle());
+        config.set(defaultKey + ".Armor", horse.getInventory().getArmor());
 
         garages.save();
         horse.remove();
+
+        player.sendTitle(horse.getCustomName(), "was saved in slot " + (index + 1), 10, 70, 20);
     }
 
-    public static void horseDeath(Player player, Entity horse) {
+    public static void horseDeath(Entity horse) {
+        FileConfiguration config = garages.get();
+        String a = "frog" + horse.getCustomName();
+    }
 
+    @EventHandler
+    public void onEntityDeath(EntityDeathEvent e) {
+        if (e.getEntity().getType() == EntityType.HORSE) {
+            horseDeath(e.getEntity());
+        }
     }
 
     @EventHandler
@@ -88,17 +105,22 @@ public class Garage extends BaseModule implements Listener {
         horse.setInvulnerable(config.getBoolean(defaultKey + ".Invulnerable"));
         horse.setColor(Horse.Color.valueOf(config.getString(defaultKey + ".Color")));
         horse.setJumpStrength(config.getDouble(defaultKey + ".JumpStrength"));
-        String style = config.getString(whoClicked.getName() + "." + e.getSlot() + ".Style");
+        String style = config.getString(defaultKey + ".Style");
         if (style != null) {
             horse.setStyle(Horse.Style.valueOf(style));
         }
-        double moveSpeed = config.getDouble(whoClicked.getName() + "." + e.getSlot() + ".GENERIC_MOVEMENT_SPEED");
+        double moveSpeed = config.getDouble(defaultKey + ".GENERIC_MOVEMENT_SPEED");
         if (moveSpeed != 0) {
             Objects.requireNonNull(horse.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED)).setBaseValue(moveSpeed);
         }
-        double maxHeath = config.getDouble(whoClicked.getName() + "." + e.getSlot() + ".GENERIC_MAX_HEALTH");
+        double maxHeath = config.getDouble(defaultKey + ".GENERIC_MAX_HEALTH");
         if (maxHeath != 0) {
             Objects.requireNonNull(horse.getAttribute(Attribute.GENERIC_MAX_HEALTH)).setBaseValue(maxHeath);
         }
+        horse.getInventory().setSaddle(config.getItemStack(defaultKey + ".Saddle"));
+        horse.getInventory().setArmor(config.getItemStack(defaultKey + ".Armor"));
+
+        config.set(defaultKey + ".TempUUID", horse.getUniqueId().toString());
+        garages.save();
     }
 }
